@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="zhb_nexmo" class="Zhb\NexmoBundle\Provider\ProviderInterface" public="true" />
+        <service id="Zhb\NexmoBundle\Provider\ProviderInterface" alias="zhb_nexmo" public="false" />
+
+        <service id="zhb_nexmo.sms" class="Zhb\NexmoBundle\Provider\SmsProvider" public="true">
+            <argument />
+            <argument />
+            <argument />
+        </service>
+        <service id="Zhb\NexmoBundle\Provider\SmsProvider" alias="zhb_nexmo.sms" public="false" />
+
+        <service id="zhb_nexmo.mail" class="Zhb\NexmoBundle\Provider\MailProvider" public="true">
+            <argument type="service" id="mailer" />
+            <argument />
+            <argument />
+        </service>
+        <service id="Zhb\NexmoBundle\Provider\MailProvider" alias="zhb_nexmo.mail" public="false" />
+
+        <service id="get_set_method_normalizer" class="Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer" public="false">
+            <tag name="serializer.normalizer" />
+        </service>
+
+        <service id="zhb_nexmo.controller.delivery_receipt_controller" class="Zhb\NexmoBundle\Controller\DeliveryReceiptController" public="true">
+            <argument type="service" id="event_dispatcher" on-invalid="null" />
+        </service>
+    </services>
+</container>
